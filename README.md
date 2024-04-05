@@ -12,6 +12,8 @@
 
 Scrapes Google reviews and returns .json files.
 
+Utilizing [Playwright](https://github.com/microsoft/playwright) for web scraping.
+
 ## Setup
 
 - Clone Repository by typing `git clone https://github.com/iarobinson/review_scraping_tool` into your terminal
