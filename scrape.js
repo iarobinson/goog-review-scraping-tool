@@ -51,12 +51,11 @@ async function extractData(page) {
     
     if(await moreBtn.count() > 0) {
       try {
-        await moreBtn.click();
         await page.waitForTimeout(2500);
+        await moreBtn.click();
       }
       catch {}
     }
-
 
     const title = await element.locator(xpathTitle).innerText();
     const review = await element.locator(xpathReviews).first().innerText();
@@ -78,7 +77,7 @@ function saveData(data) {
   let spececialCharacterRegEx = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
   let searchNameFormatted = searchTerm.replace(spececialCharacterRegEx, '').replace(/\s/g, '-').toLowerCase();
 
-  fs.writeFile(`googreviews/googreview-for-${searchNameFormatted}.json`, dataStr, 'utf8', (error) => {
+  fs.writeFile(`googreviews/googreview--${searchNameFormatted}.json`, dataStr, 'utf8', (error) => {
     if (error) {
       console.log("Nope. Your file didn't save. Here's the error:");
       return console.log(error);

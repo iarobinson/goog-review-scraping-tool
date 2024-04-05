@@ -19,7 +19,7 @@ Scrapes Google reviews and returns .json files.
 - Install dependencies `npm i`
 - Go to scrape.js and fill in the `searchTerm` string with your search
 - Run the application `node scrape.js`
-- Tour json is in the `googreviews` folder
+- Fetch json from `googreviews` folder
 
 ## Not Working?
 
