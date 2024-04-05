@@ -49,6 +49,7 @@ async function extractData(page) {
       catch {}
     }
 
+
     const title = await element.locator(xpathTitle).innerText();
     const review = await element.locator(xpathReviews).first().innerText();
 
@@ -69,10 +70,10 @@ function saveData(data) {
   let spececialCharacterRegEx = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
   let searchNameFormatted = searchTerm.replace(spececialCharacterRegEx, '').replace(/\s/g, '-').toLowerCase();
 
-  fs.writeFile(`googreviews/googreview-for-${searchNameFormatted}.json`, dataStr, 'utf8', function (error) {
+  fs.writeFile(`googreviews/googreview-for-${searchNameFormatted}.json`, dataStr, 'utf8', (error) => {
     if (error) {
-        console.log("Nope. Your file didn't save. Here's the error:");
-        return console.log(error);
+      console.log("Nope. Your file didn't save. Here's the error:");
+      return console.log(error);
     }
 
     console.log("Congratulations! Your googreview is saved in the googreview folder.");
