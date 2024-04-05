@@ -8,19 +8,21 @@
                                                
 </pre>
 
-# SCRAPE
+# goog-review-scraping-tool
 
-This is a tool that can be used to scrape google reviews and convert the data into JSON
+Scrapes Google reviews and returns .json files.
 
 ## Setup
 
 - Clone Repository by typing `git clone https://github.com/iarobinson/review_scraping_tool` into your terminal
 - Change directories into the folder `cd review_scraping_tool`
 - Install dependencies `npm i`
+- Go to scrape.js and fill in the `searchTerm` string with your search
 - Run the application `node scrape.js`
+- Tour json is in the `googreviews` folder
 
+## Not Working?
 
-## Caveat
+You need to customize the xpaths.
 
-This doesn't work right now and you need to adjust the selectors based on your own google map experience. It's a bit tricky, but I'm confident this is close to working.
-
+Instructions found in comments in scrape.js.

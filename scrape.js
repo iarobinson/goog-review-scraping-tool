@@ -1,10 +1,12 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
-// You must make your search term very specific or google won't give you the exact spot.
-const searchTerm = 'miguels restaurant in reno nevada in midtown';
-async function run() {
+
+// Your search term must be specific to get results
+const searchTerm = 'smithsonian national museum of natural history';
+
+async function scrape() {
   const browser = await chromium.launch({
-    headless: false
+    headless: false // comment out to run without browserload
   });
 
   const context = await browser.newContext();
@@ -27,17 +29,23 @@ async function run() {
 
 async function extractData(page) {
 
-  let dataToSave = [];
+  let scrapedReviewData = [];
 
-  const xpathAllReviews = '//div[@jscontroller="fIQYlf"]';
   const xpathMoreButton = "//a[@class='review-more-link']";
-  const xpathTitle = "//div[@class='TSUbDb']/a";
-  const xpathReviews = '//span[@jscontroller="MZnM8e"]';
+  // Uncomment the line below and run the application
+  // await page.pause()
+
+  // Inspect HTML in browser to find replacement values for the following
+  const xpathAllReviews = '//div[@jscontroller="fIQYlf"]';  // Adjust here 
+  const xpathTitle = "//div[@class='TSUbDb']/a";            // Adjust here 
+  const xpathReviews = '//span[@jscontroller="MZnM8e"]';    // Adjust here 
+
   await page.waitForTimeout(2500);
+
   const allReviews = page.locator(xpathAllReviews);
   const allReviewsCount = await allReviews.count();
-  
-  for (var index= 0; index < allReviewsCount; index += 1) {
+
+  for (var index = 0; index < allReviewsCount; index += 1) {
     const element = await allReviews.nth(index);
     const moreBtn = element.locator(xpathMoreButton)
     
@@ -57,12 +65,12 @@ async function extractData(page) {
       "author_name": title,
       "review": review
     }
+    console.log(rawDataToSave)
 
-    console.log(dataToSave)
-    dataToSave.push(rawDataToSave)
+    scrapedReviewData.push(rawDataToSave)
   }
 
-  return dataToSave;
+  return scrapedReviewData;
 }
 
 function saveData(data) {
@@ -80,4 +88,4 @@ function saveData(data) {
   });
 }
 
-run();
+scrape();
