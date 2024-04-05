@@ -15,7 +15,7 @@ Scrapes Google reviews and returns .json files.
 ## Setup
 
 - Clone Repository by typing `git clone https://github.com/iarobinson/review_scraping_tool` into your terminal
-- Change directories into the folder `cd review_scraping_tool`
+- Change directories into the folder `cd goog-review-scraping-tool`
 - Install dependencies `npm i`
 - Go to scrape.js and fill in the `searchTerm` string with your search
 - Run the application `node scrape.js`
