@@ -14,6 +14,8 @@ Scrapes Google reviews and returns .json files.
 
 Utilizing [Playwright](https://github.com/microsoft/playwright) for web scraping.
 
+Big thanks to [ScrapeHero](https://www.scrapehero.com/scrape-google-reviews/) for most of the code.
+
 ## Setup
 
 - `git clone https://github.com/iarobinson/goog-review-scraping-tool` - Clone Repository 
