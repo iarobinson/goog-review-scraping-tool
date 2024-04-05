@@ -1,0 +1,3 @@
+This directory is useful for looking back at past googreviews.
+
+Deleting this directory will cause the program to error.
