@@ -16,11 +16,11 @@ Utilizing [Playwright](https://github.com/microsoft/playwright) for web scraping
 
 ## Setup
 
-- Clone Repository by typing `git clone https://github.com/iarobinson/review_scraping_tool` into your terminal
-- Change directories into the folder `cd goog-review-scraping-tool`
-- Install dependencies `npm i`
+- `git clone https://github.com/iarobinson/goog-review-scraping-tool` - Clone Repository 
+- `cd goog-review-scraping-tool` - Change directories into the folder 
+- `npm i` - Install dependencies 
 - Go to scrape.js and fill in the `searchTerm` string with your search
-- Run the application `node scrape.js`
+- `node scrape.js` - Run the application
 - Fetch json from `googreviews` folder
 
 ## Not Working?
