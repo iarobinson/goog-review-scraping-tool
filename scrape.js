@@ -77,7 +77,7 @@ function saveData(data) {
   let spececialCharacterRegEx = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
   let searchNameFormatted = searchTerm.replace(spececialCharacterRegEx, '').replace(/\s/g, '-').toLowerCase();
 
-  fs.writeFile(`googreviews/googreview--${searchNameFormatted}.json`, dataStr, 'utf8', (error) => {
+  fs.writeFile(`googreviews/googreview-${searchNameFormatted}.json`, dataStr, 'utf8', (error) => {
     if (error) {
       console.log("Nope. Your file didn't save. Here's the error:");
       return console.log(error);
