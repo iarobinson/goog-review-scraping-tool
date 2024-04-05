@@ -75,7 +75,7 @@ function saveData(data) {
         return console.log(error);
     }
 
-    console.log("Congratulations! Your googreview is saved.");
+    console.log("Congratulations! Your googreview is saved in the googreview folder.");
   });
 }
 
