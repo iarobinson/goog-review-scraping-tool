@@ -1,11 +1,11 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
-
+// You must make your search term very specific or google won't give you the exact spot.
+const searchTerm = 'miguels restaurant in reno nevada in midtown';
 async function run() {
   const browser = await chromium.launch({
     headless: false
   });
-  const searchTerm = 'Dans\'s cafe washinton DC';
 
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -66,13 +66,16 @@ async function extractData(page) {
 
 function saveData(data) {
   let dataStr = JSON.stringify(data, null, 2)
-  fs.writeFile("google_reviews.json", dataStr, 'utf8', function (err) {
-    if (err) {
-        console.log("An error occurred while writing JSON Object to File.");
-        return console.log(err);
+  let spececialCharacterRegEx = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
+  let searchNameFormatted = searchTerm.replace(spececialCharacterRegEx, '').replace(/\s/g, '-').toLowerCase();
+
+  fs.writeFile(`googreviews/googreview-for-${searchNameFormatted}.json`, dataStr, 'utf8', function (error) {
+    if (error) {
+        console.log("Nope. Your file didn't save. Here's the error:");
+        return console.log(error);
     }
 
-    console.log("JSON file has been saved.");
+    console.log("Congratulations! Your googreview is saved.");
   });
 }
 
