@@ -61,9 +61,9 @@ async function extractData(page) {
       }
     }
 
+    const title = await element.locator(xpathTitle).innerText();
     const review = await element.locator(xpathReviews).first().innerText();
 
-    const title = await element.locator(xpathTitle).innerText();
 
     let rawDataToSave = {
       "author_name": title,
