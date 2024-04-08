@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 
 // Your search term must be specific to get results
-const searchTerm = 'smithsonian national museum of natural history';
+const searchTerm = 'Dans Cafe Adams Morgan';
 
 async function scrape() {
   const browser = await chromium.launch({
@@ -31,34 +31,39 @@ async function extractData(page) {
 
   let scrapedReviewData = [];
 
-  const xpathMoreButton = "//a[@class='review-more-link']";
+  const selectorMoreBtn = ".review-more-link:visible";
   // Uncomment the line below and run the application
   // await page.pause()
 
   // Inspect HTML in browser to find replacement values for the following
+  const reviewDialogScrollClass = 'review-dialog-list';
   const xpathAllReviews = '//div[@jscontroller="fIQYlf"]';  // Adjust here 
   const xpathTitle = "//div[@class='TSUbDb']/a";            // Adjust here 
   const xpathReviews = '//span[@jscontroller="MZnM8e"]';    // Adjust here 
 
   await page.waitForTimeout(2500);
 
-  const allReviews = page.locator(xpathAllReviews);
+ 
+  await scrollToBottom(page, reviewDialogScrollClass)
+  await page.waitForTimeout(1000);
+  
+
+  const allReviews = await page.locator(xpathAllReviews);
   const allReviewsCount = await allReviews.count();
 
   for (var index = 0; index < allReviewsCount; index += 1) {
     const element = await allReviews.nth(index);
-    const moreBtn = element.locator(xpathMoreButton)
-    
-    if(await moreBtn.count() > 0) {
-      try {
-        await page.waitForTimeout(2500);
+    const moreBtns = await element.locator(selectorMoreBtn).all()
+
+    if (moreBtns.length > 0) {
+      for await (const moreBtn of moreBtns) {
         await moreBtn.click();
       }
-      catch {}
     }
 
     const title = await element.locator(xpathTitle).innerText();
     const review = await element.locator(xpathReviews).first().innerText();
+
 
     let rawDataToSave = {
       "author_name": title,
@@ -85,6 +90,17 @@ function saveData(data) {
 
     console.log("Congratulations! Your googreview is saved in the googreview folder.");
   });
+}
+
+async function scrollToBottom(page, elementSelector, numScrolls = 30) {
+  await page.evaluate(async (args) => {
+    const element = document.getElementsByClassName(args.className)[0];
+    for (let i = 0; i < args.scrollCount; i++) {
+      const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+      element.scrollTo(0, element.scrollHeight);
+      await delay(250);
+    }
+  }, {className: elementSelector, scrollCount: numScrolls});
 }
 
 scrape();
